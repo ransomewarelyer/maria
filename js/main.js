@@ -9,7 +9,76 @@
             $('.navbar').fadeOut('slow').css('display', 'none');
         }
     });
+// -----------------------
+    document.addEventListener("DOMContentLoaded", function() {
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const audioTitle = document.getElementById('audio-title');
+    const audioDescription = document.getElementById('audio-description');
+    const audioList = document.getElementById('audioList');
 
+    const songs = [
+        { title: "Song 1", description: "Description for Song 1", src: "songs/song1.mp3" },
+        { title: "Song 2", description: "Description for Song 2", src: "songs/song2.mp3" },
+        // Add more songs here
+    ];
+
+    let currentSongIndex = 0;
+
+    function loadSong(index) {
+        const song = songs[index];
+        audioPlayer.src = song.src;
+        audioTitle.textContent = song.title;
+        audioDescription.textContent = song.description;
+    }
+
+    function playPauseAudio() {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+        } else {
+            audioPlayer.pause();
+            playPauseBtn.innerHTML = '<i class="fa fa-play"></i>';
+        }
+    }
+
+    function nextSong() {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
+        loadSong(currentSongIndex);
+        audioPlayer.play();
+        playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+    }
+
+    function prevSong() {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+        loadSong(currentSongIndex);
+        audioPlayer.play();
+        playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+    }
+
+    playPauseBtn.addEventListener('click', playPauseAudio);
+    nextBtn.addEventListener('click', nextSong);
+    prevBtn.addEventListener('click', prevSong);
+
+    songs.forEach((song, index) => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item';
+        li.textContent = song.title;
+        li.addEventListener('click', () => {
+            currentSongIndex = index;
+            loadSong(currentSongIndex);
+            audioPlayer.play();
+            playPauseBtn.innerHTML = '<i class="fa fa-pause"></i>';
+        });
+        audioList.appendChild(li);
+    });
+
+    loadSong(currentSongIndex);
+});
+
+    // ------------
 
     // Smooth scrolling on the navbar links
     $(".navbar-nav a").on('click', function (event) {
