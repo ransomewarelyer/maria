@@ -20,9 +20,9 @@
     const audioList = document.getElementById('audioList');
 
     const songs = [
-        { title: "if the heaven", description: "#Original", src: "song/if the heaven.ogg" },
-        { title: "step quiet ", description: "#original", src: "song/ownway.ogg" },
-        { title: "Own way", description: "#original, #undone", src: "song/stepquiet.ogg" },
+        { title: "if the heaven!", description: "#Original", src: "song/if the heaven.ogg" },
+        { title: "Own Way!", description: "#original", src: "song/ownway.ogg" },
+        { title: "step quiet!", description: "#original, #undone", src: "song/stepquiet.ogg" },
         // Add more songs here
     ];
 
